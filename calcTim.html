@@ -8,18 +8,22 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    <script src="calcTim.js"></script>
+
     <title>Calculator by Tim</title>
   </head>
   <body class="container">
       <h1>Body Mass Index</h1>
-      What is your full name? <input type="text" id="name"><br>
+      What is your full name? <input type="text" id="fullName"><br>
       Enter your weight in pounds <input type="number" id="weight"><br>
       Enter your height in inches <input type="number" id="height"><br>
-      <button class="btn btn-lg btn-danger">Calculate BMI</button>
+      <button class="btn btn-lg btn-danger"
+              onClick="calcBMI()">
+          Calculate BMI
+      </button>
       <br>
       <hr>
-      <br>
-      Your Body Mass Index is
+      <h2>Results</h2>
       <label id="BMI">????</label>
 
     <!-- Optional JavaScript -->
