@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8"/>
+  <script type="application/javascript">
+
+
+    function draw() {
+      var canvas = document.getElementById('canvas');
+      if (canvas.getContext) {
+        ctx.clearRect(0,0,canvas.width,canvas.height)
+        ctx.strokeStyle="black"
+        drawGrid(canvas,false)
+        drawGrid(canvas,true)
+
+        if (points.length==0){
+          return
+        }
+        ctx.strokeStyle="red"
+        ctx.lineWidth=5
+        ctx.beginPath()
+        let p = points[0]
+        let x = p[0]
+        let y = p[1]
+        ctx.moveTo(x,y)
+        ctx.fillText("0",x,y)
+        for(let i=1; i< points.length; i++){
+          [x,y] = points[i]
+          ctx.lineTo(x,y)
+          ctx.fillText(""+i,x,y)
+        }
+        //[x,y] = points[0]
+        //ctx.lineTo(x,y)
+        ctx.stroke()
+        ctx.lineWidth=1
+
+        //drawShapes(canvas)
+      }
+    }
+
+    let points=[]
+    let canvas
+    let ctx
+
+    function init(){
+      canvas = document.getElementById('canvas')
+      ctx = canvas.getContext('2d')
+      canvas.addEventListener('click',(event)=>{
+        console.dir(event)
+        drawCircle(canvas,event.offsetX,event.offsetY,10)
+        points.push([event.offsetX,event.offsetY])
+        draw()
+
+      })
+      draw()
+    }
+
+    function drawCircle(canvas,x,y,r){
+      let ctx = canvas.getContext('2d')
+      ctx.beginPath();
+      ctx.arc(x,y,r,0,2*Math.PI,true)
+      ctx.stroke()
+    }
+
+    function drawShapes(canvas){
+        var ctx = canvas.getContext('2d');
+        ctx.strokeStyle = "rgb(255,0,0)"
+        drawCircle(ctx,100,200,50)
+    }
+
+    function clearGrid(event){
+      console.log("clearing!")
+      points=[]
+      console.dir(points)
+      draw()
+    }
+
+    function drawGrid(canvas,major){
+      // if major is true this draws a thick grid every 100 pixels
+      // and labels the lines; otherwise it draws a light grid every
+      // 10 pixels
+      const ctx = canvas.getContext('2d');
+      ctx.font = "10pt Georgia"
+      linewidth = major?5:1
+      increment = major?100:10
+      if (major){
+        ctx.strokeStyle = "rgb(0,0,0)"
+      } else {
+        ctx.strokeStyle = "rgb(200,200,200)"
+      }
+      ctx.beginPath();
+      for(let x = 0; x<=canvas.width; x=x+increment){
+        ctx.moveTo(x,0)
+        ctx.lineTo(x,canvas.height)
+        if (major) {ctx.fillText("x="+x,x,20)}
+      }
+      ctx.stroke()
+      ctx.beginPath();
+      for(let y = 0; y<=canvas.height; y=y+increment){
+        ctx.moveTo(0,y)
+        ctx.lineTo(canvas.width,y)
+        if (major) {ctx.fillText("y="+y,0,y+10)}
+      }
+      ctx.stroke()
+
+      let s = "<ul>\n"
+      for(let i in points){
+        let p = points[i]
+        s += "    <li> p"+i+"=("+p[0]+","+p[1]+") </li>\n"
+      }
+      s += "</ul>"
+      pointsDiv.innerHTML = s
+
+    }
+
+
+  </script>
+ </head>
+ <body onload="init();">
+   <h1>MKTYP6a interactive javascript canvas for 11/13</h1>
+   <br>
+   <button onclick="clearGrid()">Clear</button>
+   <canvas style="float:left;margin-right:30px" id="canvas" width="500" height="500"></canvas>
+   <div id="pointsDiv"></div>
+ </body>
+</html>
