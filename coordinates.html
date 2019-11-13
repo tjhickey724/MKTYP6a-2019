@@ -106,7 +106,7 @@
       let s = "<ul>\n"
       for(let i in points){
         let p = points[i]
-        s += "    <li> p"+i+"=("+p[0]+","+p[1]+") </li>\n"
+        s += "    <li> ctx.lineTo("+p[0]+","+p[1]+") </li>\n"
       }
       s += "</ul>"
       pointsDiv.innerHTML = s

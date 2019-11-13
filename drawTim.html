@@ -44,6 +44,21 @@
     ctx.arc(x,y,r,0,2*Math.PI,true)
     ctx.fill()
   }
+  function drawTim(){
+    ctx.strokeStyle="blue"
+    ctx.lineWidth=5
+    ctx.beginPath()
+    ctx.moveTo(198,100)
+    ctx.lineTo(300,100)
+    ctx.lineTo(362,150)
+    ctx.lineTo(364,213)
+    ctx.lineTo(308,263)
+    ctx.lineTo(199,263)
+    ctx.lineTo(136,211)
+    ctx.lineTo(142,141)
+    ctx.lineTo(195,102)
+    ctx.stroke()
+  }
 
   </script>
  </head>
@@ -57,17 +72,9 @@
    <canvas style="float:left;margin-right:30px" id="canvas" width="500" height="500"></canvas>
    <br>
 
-   <div>
-     x <input type="text" id="xTF" value="100"><br>
-     y <input type="text" id="yTF" value="200"><br>
-     r <input type="text" id="rTF" value="10"><br>
-     c <input type="text" id="colorTF" value="#ffaa55"><br>
-     <button onclick="drawOneCircle()">draw a circle</button>
-     <br>
-     
-     n <input type="text" id="nTF" value="10"><br>
-     <button onclick="drawCircles()">draw circles</button>
-   </div>
+
+ <button onclick="drawTim()">Draw Tim</button>
+
 
    <script src="drawgrid.js"></script>
  </body>
