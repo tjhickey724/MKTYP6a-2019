@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <script type="application/javascript">
+
+
+  function calcBMI(){
+    w = weight.value  // read weight from element with id="weight"
+    h = height.value  // read height from element with id="height"
+    bmi = 703*w/(h*h)  // calculate the Body Mass Index
+    BMI.innerHTML =    // write into label element with id "BMI"
+        "You're BMI is "
+        +bmi.toFixed(1)  // round BMI to 1 decimal place
+
+
+  }
+  let canvas=null  // we give this a value in the init method
+  let ctx=null
+
+  function init(){
+    // initialize canvas and ctx after the page is loaded
+    canvas = document.getElementById('canvas')
+    ctx = canvas.getContext('2d')
+    drawBackground()
+    canvas.addEventListener('click',mouseClick,false)
+canvas.addEventListener('mousemove',mouseMove,false)
+  }
+
+  function mouseClick(event){
+    console.dir(event)
+    const x = event.offsetX
+    const y = event.offsetY
+    //draw something here ...
+    ctx.fillRect(x,y,20,50)
+  }
+
+  function mouseMove(event){
+    const x = event.offsetX
+    const y = event.offsetY
+    // put your own code in here!
+    if (event.buttons==1){ // only draw if they are pushing the button!
+        ctx.fillRect(x,y,10,20)
+    }
+}
+
+  function drawCircle(x,y,r){
+    // draw a circle centered at (x,y) with radius r
+    ctx.beginPath();
+    ctx.arc(x,y,r,0,2*Math.PI,true)
+    ctx.stroke()
+  }
+
+  function drawCircles(){
+    let x = parseInt(xTF.value)
+    let y = parseInt(yTF.value)
+    let r = parseInt(rTF.value)
+    let n = parseInt(nTF.value)
+    let color = colorTF.value
+    for (let a = 0; a<n; a++){
+      drawCircle(x+10*a, y-10*a, 10+r*a)
+    }
+  }
+
+
+  function drawOneCircle(){
+    let x = parseInt(xTF.value)
+    let y = parseInt(yTF.value)
+    let r = parseInt(rTF.value)
+    let color = colorTF.value
+    ctx.fillStyle=color
+    ctx.beginPath();
+    ctx.arc(x,y,r,0,2*Math.PI,true)
+    ctx.fill()
+  }
+  function drawTim(){
+    ctx.strokeStyle="blue"
+    ctx.lineWidth=5
+    ctx.beginPath()
+    ctx.moveTo(198,100)
+    ctx.lineTo(300,100)
+    ctx.lineTo(362,150)
+    ctx.lineTo(364,213)
+    ctx.lineTo(308,263)
+    ctx.lineTo(199,263)
+    ctx.lineTo(136,211)
+    ctx.lineTo(142,141)
+    ctx.lineTo(195,102)
+    ctx.stroke()
+  }
+
+  </script>
+ </head>
+ <body onload="init();">
+   <h1>Tim's Final Project .... </h1>
+   <div class="row">
+     <div class="col">
+       <h1>Calculations</h1>
+       Put some textfields, labels, and buttons here ..
+       <h1>Body Mass Index</h1>
+       What is your full name? <input type="text" id="fullName"><br>
+       Enter your weight in pounds <input type="number" id="weight"><br>
+       Enter your height in inches <input type="number" id="height"><br>
+       <button class="btn btn-lg btn-danger"
+               onClick="calcBMI()">
+           Calculate BMI
+       </button>
+       <br>
+       <hr>
+       <h2>Results</h2>
+       <label id="BMI">????</label>
+
+     </div>
+     <div class="col">
+       <h1>Canvas</h1>
+       <canvas style="float:left;margin-right:30px" id="canvas" width="500" height="500"></canvas>
+
+
+     </div>
+     <div class="col">
+       <h1>Buttons etc to draw on Canvas</h1>
+       <button style="background:red; color:white"
+               onclick="drawBackground()">Clear</button>
+
+       <br> <button onclick="drawTim()">Draw Tim</button>
+       ....
+     </div>
+
+
+
+ <!-- Optional JavaScript -->
+ <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+ <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+ <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+   <script src="drawgrid.js"></script>
+ </body>
+</html>
